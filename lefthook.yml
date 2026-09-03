@@ -1,0 +1,22 @@
+# Lefthook — lightweight Git hooks (install with `brew install lefthook` or `go install github.com/evilmartians/lefthook@latest`, then `lefthook install`)
+# Hooks are *not* required for external contributors; CI enforces the same checks.
+# Run `just hooks` or `lefthook install` after cloning.
+
+pre-commit:
+  parallel: true
+  commands:
+    fmt:
+      run: cargo fmt --all -- --check
+      stage_fixed: false
+    # lightweight static check — fast `cargo check`; full `clippy` runs on pre-push/CI
+    check:
+      run: cargo check --all-targets --all-features
+
+pre-push:
+  commands:
+    lint:
+      run: cargo clippy --all-targets --all-features -- -D warnings
+    test:
+      run: cargo test --all-features
+    # coverage is intentionally not run on pre-push (expensive); CI runs it.
+    # For local coverage: `just coverage` or `just coverage-html` (requires nightly + llvm-tools)

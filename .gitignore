@@ -1,0 +1,20 @@
+/target
+/dist
+**/*.rs.bk
+/ni
+/prompts
+# coverage
+lcov.info
+*.profraw
+*.profdata
+/target/llvm-cov
+/coverage
+/html
+# mutants
+mutants.out
+mutants.out.old
+
+.env
+.idea
+.vscode
+.DS_Store

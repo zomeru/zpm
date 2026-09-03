@@ -1,0 +1,44 @@
+[package]
+name = "zpm"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Fast, polished package-manager abstraction CLI for the modern JavaScript ecosystem"
+license = "MIT"
+repository = "https://github.com/zomeru/zpm"
+homepage = "https://github.com/zomeru/zpm"
+keywords = ["package-manager", "npm", "pnpm", "yarn", "bun", "deno"]
+categories = ["development-tools"]
+readme = "README.md"
+exclude = ["/.github", "/prompts", "/ni"]
+
+[dependencies]
+clap = { version = "4.6", features = ["derive", "cargo"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "1.0"
+thiserror = "2.0"
+anyhow = "1.0"
+dialoguer = { version = "0.12", features = ["fuzzy-select"] }
+console = "0.16"
+which = "8.0"
+dirs = "6.0"
+
+[dev-dependencies]
+tempfile = "3.13"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+overflow-checks = false
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "warn"
+missing_debug_implementations = "warn"
+
+[lints.clippy]
+pedantic = { level = "allow", priority = -1 }
+uninlined_format_args = "warn"

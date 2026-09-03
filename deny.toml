@@ -1,0 +1,41 @@
+# cargo-deny configuration — https://embarkstudios.github.io/cargo-deny/
+# Run with `cargo deny check` (install via `cargo install cargo-deny`)
+# CI runs `cargo deny check advisories` at minimum; full check requires no warnings.
+
+[graph]
+all-features = true
+targets = []
+
+[advisories]
+vulnerability = "deny"
+unmaintained = "warn"
+yanked = "warn"
+ignore = []
+
+[licenses]
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "Unicode-3.0",
+    "Unicode-DFS-2016",
+    "BSD-3-Clause",
+    "ISC",
+    "CC0-1.0",
+    "MPL-2.0",
+    "Zlib",
+]
+confidence-threshold = 0.8
+exceptions = []
+
+[bans]
+multiple-versions = "allow"
+wildcards = "allow"
+highlight = "all"
+# To ban a crate: { name = "crate", deny = [{ reason = "...", version = "*" }] }
+deny = []
+
+[sources]
+unknown-registry = "warn"
+unknown-git = "warn"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []
